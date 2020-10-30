@@ -1,0 +1,21 @@
+    function CheckActive() {
+           
+        if (!isMaterialStudy && !isAssistStudy)
+            return;
+            
+        var d = new Date();
+        if (d.getTime() - latestMoveTime > 2800 * 1000) 
+        {         
+            clearInterval(actTimerID);       
+            clearInterval(secTimerID);
+            EndStatTime();            
+            Leave();
+        }
+    }
+    var actTimerID = window.setInterval("CheckActive();", 5000);
+function Leave()
+    {
+        var msg = GetRandomWord();
+        var loadingInfo = '<div class="leaveMsg" ><div>提示：</div><br/>'+"到点了，该切换到下一课啦"+'<input type="button" value="OK" onclick="TINY.box.hide();"/></div>';
+        TINY.box.show({html:loadingInfo,mask:true,animate:false,close:true,boxid:'frameless',closejs:function(){LeaveBack()}});
+    }
